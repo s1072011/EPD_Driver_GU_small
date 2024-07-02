@@ -173,7 +173,8 @@ void EPD_Driver::COG_initial()
 	{
 		SPISettings _settingScreen;
 		_settingScreen = {8000000, MSBFIRST, SPI_MODE0};
-		SPI.begin();
+        // Set MISO to a unused pin, because the original pin is occupied by RST.
+		SPI.begin(SCK, 3, MOSI, SS);
 		SPI.beginTransaction(_settingScreen);
 	}
 	#endif
